@@ -93,3 +93,11 @@ textarea{
     color: #ff0000;
     display: inline-block;
 }
+
+.orgText{
+    margin-bottom: 15px;
+}
+
+.noErr{
+    color: rgba(28, 190, 131, 1);
+}

@@ -21,23 +21,30 @@
     {{message}}
   </div>
 
-  <div class="corrections">
-    <div *ngFor="let word of wrongWord" [hidden]="false">
-      MISTAKE WORD: <div class="doRed"> {{word.word}} </div> <br/>
-      <br/>
-      SUGGESTIONS: 
-      <ul>
-        <li *ngFor="let suggestion of word.suggestions">
-          {{suggestion}}
-        </li>
-      </ul>
+  <div class="corrections" *ngIf="!wordCorrect || !lineCorrect">
+    <div *ngIf="!wordCorrect">
+      <div *ngFor="let word of wrongWord" [hidden]="false">
+        MISTAKE WORD: <div class="doRed"> {{word.word}} </div> <br/>
+        <br/>
+        SUGGESTIONS: 
+        <ul>
+          <li *ngFor="let suggestion of word.suggestions">
+            {{suggestion}}
+          </li>
+        </ul>
+      </div>
     </div>
     
-    <div *ngFor="let message of messages" [hidden]="false">
-      MISTAKE: {{message.message}} <br>
-      <mark>RULE: {{message.rule?.id}} </mark><br>
-      SUGGESTION: {{message.suggestions}}
+    <div *ngIf="!lineCorrect">
+      <div *ngFor="let message of messages" [hidden]="false">
+        MISTAKE: {{message.message}} <br>
+        <mark>RULE: {{message.rule?.id}} </mark><br>
+        SUGGESTION: {{message.suggestions}} <br/><br/>
+      </div>
     </div>
+  </div>
+  <div *ngIf="wordCorrect && lineCorrect" class="noErr">
+    Text has no errors.
   </div>
 
   

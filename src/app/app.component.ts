@@ -15,6 +15,8 @@ export class AppComponent {
   title = 'hackathon';
   wrongWord : any[];
   checkGrammar: boolean = false;
+  lineCorrect: boolean = false;
+  wordCorrect: boolean = false;
 
   constructor(private chatService : ChatServiceService, private elementRef: ElementRef){
 
@@ -25,8 +27,14 @@ export class AppComponent {
     //   this.imgSrc = "./../assets/images/" + i + ".png";
     // }
     this.chatService.getMessages().subscribe((message: any) => {
+      if(message.matches.length == 0){
+        this.lineCorrect = true;
+      }else{
+        this.lineCorrect = false;
+      }
       message.matches.forEach(returnVal => {
         this.messages.push(returnVal);
+        console.log("this.messages", this.messages);
       });
 
       // this.messages.push(message);
@@ -35,6 +43,11 @@ export class AppComponent {
     this.chatService.getWrongWord().subscribe((word: any) => {
       console.log(word);
       this.wrongWord = word;
+      if(word.length == 0){
+        this.wordCorrect = true;
+      }else{
+        this.wordCorrect = false;
+      }
       // word.forEach(returnVal => {
       //   console.log(returnVal);
       //   this.wrongWord = returnVal;

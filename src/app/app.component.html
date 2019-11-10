@@ -19,6 +19,7 @@
 
   <div class="orgText">
     {{message}}
+    <div [innerHTML]="temp"></div>
   </div>
 
   <div class="corrections" *ngIf="!wordCorrect || !lineCorrect">

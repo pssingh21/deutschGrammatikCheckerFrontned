@@ -17,6 +17,7 @@ export class AppComponent {
   checkGrammar: boolean = false;
   lineCorrect: boolean = false;
   wordCorrect: boolean = false;
+  temp: string = '';
 
   constructor(private chatService : ChatServiceService, private elementRef: ElementRef){
 
@@ -46,6 +47,14 @@ export class AppComponent {
       if(word.length == 0){
         this.wordCorrect = true;
       }else{
+        var looptill = this.wrongWord.length;
+        this.temp = this.message;
+        for(let i = 0; i < this.wrongWord.length; i++){
+          let replace = this.wrongWord[i].word;
+          var re = new RegExp(replace,"g");
+          this.temp = this.temp.replace(re, `<mark style="color:#ff0000;">` + this.wrongWord[i].word + `</mark>`);
+        }
+        console.log("fancy", this.message);
         this.wordCorrect = false;
       }
       // word.forEach(returnVal => {
@@ -72,6 +81,7 @@ export class AppComponent {
     this.checkGrammar = true;
     this.chatService.sendMessage(this.message);
     this.messages = [];
+    this.temp = '';
   }
   
 

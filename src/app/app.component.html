@@ -23,6 +23,9 @@
 
   <div class="corrections" *ngIf="!wordCorrect || !lineCorrect">
     <div *ngIf="!wordCorrect">
+      <div class="titles">
+        Spelling Corrections:
+      </div>
       <div *ngFor="let word of wrongWord" [hidden]="false">
         MISTAKE WORD: <div class="doRed"> {{word.word}} </div> <br/>
         <br/>
@@ -36,6 +39,9 @@
     </div>
     
     <div *ngIf="!lineCorrect">
+      <div class="titles">
+        Sentence corrections:
+      </div>
       <div *ngFor="let message of messages" [hidden]="false">
         MISTAKE: {{message.message}} <br>
         <mark>RULE: {{message.rule?.id}} </mark><br>

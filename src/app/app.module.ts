@@ -15,7 +15,7 @@ import { ChatServiceService } from './chat-service.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [ChatServiceService],
   bootstrap: [AppComponent]

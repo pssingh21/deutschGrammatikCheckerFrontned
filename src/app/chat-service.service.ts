@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatServiceService {
   private url = 'https://gentle-anchorage-42975.herokuapp.com/';
+  // private url = 'http://localhost:3030/';
   private socket;
   
   constructor() {
@@ -20,10 +21,31 @@ export class ChatServiceService {
     return Observable.create((observer) => {
       console.log("her3e", observer);
       this.socket.on('new-message', (message) => {
-        console.log("here1");
+        console.log("here1", message);
         observer.next(message);
       });
     });
   }
+
+  public getWrongWord = () => {
+    return Observable.create((observer) => {
+      console.log("her3e", observer);
+      this.socket.on('wrong-word', (word) => {
+        console.log("here1", word);
+        observer.next(word);
+      });
+    });
+  }
+
+
+  // public getSuggestions = () => {
+  //   return Observable.create((observer) => {
+  //     console.log("her3e", observer);
+  //     this.socket.on('suggestion', (sug) => {
+  //       console.log("here1sug");
+  //       observer.next(sug);
+  //     });
+  //   });
+  // }
 
 }

@@ -1,8 +1,49 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div *ngFor="let message of messages">
-  {{message}}
+
+<div class="textin">
+  <div class="heading1">
+    German Input:
+  </div>
+  <textarea rows="15" cols="200" [(ngModel)]="message" placeholder="Enter German text"></textarea>
+  <!-- <button (click)="sendMessage()">Send</button> -->
+  
+  <div class="buttonContainer">
+    <a href="#" class="button" title="Sure?" (click)="sendMessage()">Check Grammar</a>
+  </div>
 </div>
 
-<input [(ngModel)]="message" (keydown)=sendMessage()/>
+<div *ngIf="checkGrammar" class="correction">
+  <div class="heading2">
+    Corrections:
+  </div>
+
+  <div class="orgText">
+    {{message}}
+  </div>
+
+  <div class="corrections">
+    <div *ngFor="let word of wrongWord" [hidden]="false">
+      MISTAKE WORD: <div class="doRed"> {{word.word}} </div> <br/>
+      <br/>
+      SUGGESTIONS: 
+      <ul>
+        <li *ngFor="let suggestion of word.suggestions">
+          {{suggestion}}
+        </li>
+      </ul>
+    </div>
+    
+    <div *ngFor="let message of messages" [hidden]="false">
+      MISTAKE: {{message.message}} <br>
+      <mark>RULE: {{message.rule?.id}} </mark><br>
+      SUGGESTION: {{message.suggestions}}
+    </div>
+  </div>
+
+  
+</div>
+
+
+
 
 <router-outlet></router-outlet>

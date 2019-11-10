@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { ChatServiceService } from './chat-service.service';
 
 @Component({
@@ -9,23 +9,57 @@ import { ChatServiceService } from './chat-service.service';
 export class AppComponent {
 
   message: string;
-  messages: string[] = [];
-
+  messages: any[] = [];
+  // imgSrcArr: string[] = ["STart.png", "HowToPlay.png", "3.png", "2.png", "1.png", "GOFinal.png", "StarFieldSimulation.gif"];
+  imgSrc : string;
   title = 'hackathon';
+  wrongWord : any[];
+  checkGrammar: boolean = false;
 
-  constructor(private chatService : ChatServiceService){
+  constructor(private chatService : ChatServiceService, private elementRef: ElementRef){
 
   }
 
   ngOnInit(){
-    this.chatService.getMessages().subscribe((message: string) => {
-      this.messages.push(message);
+    // for(let i = 1; i <= 3; i++){
+    //   this.imgSrc = "./../assets/images/" + i + ".png";
+    // }
+    this.chatService.getMessages().subscribe((message: any) => {
+      message.matches.forEach(returnVal => {
+        this.messages.push(returnVal);
+      });
+
+      // this.messages.push(message);
     });
+
+    this.chatService.getWrongWord().subscribe((word: any) => {
+      console.log(word);
+      this.wrongWord = word;
+      // word.forEach(returnVal => {
+      //   console.log(returnVal);
+      //   this.wrongWord = returnVal;
+      // });
+
+      // this.messages.push(message);
+    });
+
+    // this.chatService.getSuggestions().subscribe((sug: string) => {
+    //   this.suggestions.push(sug);
+    // });
+    // this.elementRef.nativeElement.ownerDocument.body.style.backgroundImage = 'url(./assets/images/windows-1.0.jpg)';
+    // console.log(this.elementRef.nativeElement.ownerDocument.body.style);
+  }
+
+  next(){
+    // this.imgSrc = this.imgSrcArr[++this.index];
+    // this.elementRef.nativeElement.ownerDocument.body.style.backgroundImage = 'url(./assets/images/'+ this.imgSrc +')';
   }
 
   sendMessage(){
+    this.checkGrammar = true;
     this.chatService.sendMessage(this.message);
-    this.message = '';
+    this.messages = [];
   }
+  
 
 }

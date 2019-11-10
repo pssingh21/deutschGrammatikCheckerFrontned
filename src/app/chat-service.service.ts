@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatServiceService {
-  private url = 'https://gentle-anchorage-42975.herokuapp.com/';
-  // private url = 'http://localhost:3030/';
+  // private url = 'https://gentle-anchorage-42975.herokuapp.com/';
+  private url = 'http://localhost:3030/';
   private socket;
   
   constructor() {

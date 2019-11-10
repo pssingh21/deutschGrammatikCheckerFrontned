@@ -70,6 +70,8 @@ a.button:hover{
 }
 
 textarea{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
     background: #f8f8f8;
     border: solid 15.5px #e1e1e1;
     outline: none;
@@ -96,6 +98,7 @@ textarea{
 
 .orgText{
     margin-bottom: 15px;
+    color:#6c696c;
 }
 
 .noErr{

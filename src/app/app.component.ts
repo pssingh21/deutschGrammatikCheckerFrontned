@@ -46,6 +46,7 @@ export class AppComponent {
       this.wrongWord = word;
       if(word.length == 0){
         this.wordCorrect = true;
+        this.temp = this.message;
       }else{
         var looptill = this.wrongWord.length;
         this.temp = this.message;
